@@ -84,6 +84,9 @@
              </div>
          </div>
     </div>
+    <div class="row">
+        <div id="pspdfkit" style="height: 100vh !important;width:100%"></div>
+    </div>
  </div>
 @endsection
 @push('custom-js')

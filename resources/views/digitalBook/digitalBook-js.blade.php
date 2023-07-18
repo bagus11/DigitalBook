@@ -187,6 +187,7 @@
                     }
                     getCallback('getDigitalBookLog',data,function(response){
                         var fileName = response.detail.attachment.split('/')
+                       
                         swal.close()
                         $('#dbdDetailCodeLb').html(' : '+ response.detail.detailCode)
                         $('#dbdLocationLb').html(' : '+ response.detail.location_relation.name)
@@ -399,7 +400,7 @@
                                     <tr>
                                         <td style="text-align:center;"><input type="checkbox" class="checkedActive" value="${response[i].userId}" data-user_id="${response[i].userId}"></td>
                                         <td style="text-align:left;">${response[i].user_relation.name}</td>
-                                        <td style="text-align:left;">${response[i].user_relation.title_relation.name}</td>
+                                        <td style="text-align:left;">${response[i].user_relation != null ? response[i].user_relation.title_relation.name : '-'}</td>
                                     </tr>
                                 `;
                             }
@@ -465,7 +466,7 @@
                                     <tr>
                                         <td style="text-align:center;"><input type="checkbox" class="checkedInactive" value="${response[i].id}" data-id="${response[i].id}"></td>
                                         <td style="text-align:left;">${response[i].name}</td>
-                                        <td style="text-align:left;">${response[i].title_relation.name}</td>
+                                        <td style="text-align:left;">${response[i].title_relation != null ? response[i].title_relation.name : '-'}</td>
                                     </tr>
                                 `;
                             }
@@ -556,16 +557,22 @@
                     const date = d.toISOString().split('T')[0];
                     const time = d.toTimeString().split(' ')[0];
                     var fileName = response[i].attachment.split('/')
+                     var fileAttachment='';
+                     if(response[i].attachment){
+                         fileAttachment =`
+                                   <a target="_blank" href="{{URL::asset('${response[i].attachment}')}}" class="ml-3" style="color:blue;">
+                                       <i class="far fa-file" style="color: red;font-size: 20px;"></i>
+                                           ${fileName[2]}
+                                   </a>
+                        `;
+                     }
                     data += `
                         <tr>
                             <td style="width:10px !important;">${date} ${time}</td>
                             <td style="width:15px !important;">${response[i].user_relation.name}</td>
                             <td style="width:20px !important;"><p>${response[i].message}<p/></td>
                             <td style="width:10px !important;">
-                                <a target="_blank" href="{{URL::asset('${response[i].attachment}')}}" class="ml-3" style="color:blue;">
-                                    <i class="far fa-file" style="color: red;font-size: 20px;"></i>
-                                    ${fileName[2]}
-                                </a>
+                              ${fileAttachment}
                             </td>
                         </tr>
                     `;

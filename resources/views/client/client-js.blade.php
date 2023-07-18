@@ -1,73 +1,73 @@
 <script>
 
     // Call Function
-        getCallback('getDitialBookClient','',function(response){
-            swal.close()
-            $('#contentContainer').empty()
-            var data =''
-            var departmentName=''  
-            var detailBook =''         
-            if(response.data){
-                for(i = 0 ;i < response.data.length; i++){
-                    var digital_relation =response.data[i].digital_relation 
-                    if(digital_relation.length > 0){ 
-                        // Departement Relation
-                        var departmentRelation = response.data[i].departement_relation
-                        for(j = 0 ; j < departmentRelation.length; j++){
-                            // Digital Header
-                                var digitalHeader = departmentRelation[j].digital_relation
-                                if(digitalHeader.length > 0){
-                                    for(k = 0; k < digitalHeader.length; k++){
-                                        // Detail Digital
-                                            var detailName = digitalHeader[k].detail_relation
-                                            if(detailName.length > 0){
-                                                for(l = 0 ; l < detailName.length; l++){
-                                                    var detailLabel = detailName[l].detailCode
-                                                    detailBook +=`
-                                                        <li class="nav-item" style="width:100%">
-                                                            <a href="" class="nav-link ml-5">
-                                                                <p>${detailLabel}</p>
-                                                            </a>
-                                                        </li>
-                                                   `;
-                                                }
+        // getCallback('getDitialBookClient','',function(response){
+        //     swal.close()
+        //     $('#contentContainer').empty()
+        //     var data =''
+        //     var departmentName=''  
+        //     var detailBook =''         
+        //     if(response.data){
+        //         for(i = 0 ;i < response.data.length; i++){
+        //             var digital_relation =response.data[i].digital_relation 
+        //             if(digital_relation.length > 0){ 
+        //                 // Departement Relation
+        //                 var departmentRelation = response.data[i].departement_relation
+        //                 for(j = 0 ; j < departmentRelation.length; j++){
+        //                     // Digital Header
+        //                         var digitalHeader = departmentRelation[j].digital_relation
+        //                         if(digitalHeader.length > 0){
+        //                             for(k = 0; k < digitalHeader.length; k++){
+        //                                 // Detail Digital
+        //                                     var detailName = digitalHeader[k].detail_relation
+        //                                     if(detailName.length > 0){
+        //                                         for(l = 0 ; l < detailName.length; l++){
+        //                                             var detailLabel = detailName[l].detailCode
+        //                                             detailBook +=`
+        //                                                 <li class="nav-item" style="width:100%">
+        //                                                     <a href="" class="nav-link ml-5">
+        //                                                         <p>${detailLabel}</p>
+        //                                                     </a>
+        //                                                 </li>
+        //                                            `;
+        //                                         }
     
-                                            }
-                                        // Detail Digital
-                                    }
-                                }else{
-                                    alert('test')
-                                    detailBook.empty()
-                                }
-                            // Digital Header
+        //                                     }
+        //                                 // Detail Digital
+        //                             }
+        //                         }else{
+        //                             alert('test')
+        //                             detailBook.empty()
+        //                         }
+        //                     // Digital Header
 
-                            departmentName +=`
-                                            <li class="nav-item" style="width:100%" >
-                                                <a href="#" class="nav-link ml-3">
-                                                    <p>${departmentRelation[j].name}<i class="right fas fa-angle-left"></i></p>
-                                                </a>
-                                                <ul class="nav nav-treeview">
-                                                    ${detailBook}
-                                                </ul>
-                                            </li>
-                            `;
-                        }   
-                        // Departement Relation   
-                        data +=`
-                                <li class="nav-item menu-is-opening menu-open">
-                                    <a href="#" class="nav-link ">
-                                        <p>${response.data[i].name}<i class="right fas fa-angle-left"></i></p>
-                                    </a>
-                                    <ul class="nav nav-treeview" style="display: block;">
-                                        ${departmentName}
-                                    </ul>
-                                </li>   
-                        `;
-                    }
-                }
-            }
-            $('#contentContainer').html(data)
-        })
+        //                     departmentName +=`
+        //                                     <li class="nav-item" style="width:100%" >
+        //                                         <a href="#" class="nav-link ml-3">
+        //                                             <p>${departmentRelation[j].name}<i class="right fas fa-angle-left"></i></p>
+        //                                         </a>
+        //                                         <ul class="nav nav-treeview">
+        //                                             ${detailBook}
+        //                                         </ul>
+        //                                     </li>
+        //                     `;
+        //                 }   
+        //                 // Departement Relation   
+        //                 data +=`
+        //                         <li class="nav-item menu-is-opening menu-open">
+        //                             <a href="#" class="nav-link ">
+        //                                 <p>${response.data[i].name}<i class="right fas fa-angle-left"></i></p>
+        //                             </a>
+        //                             <ul class="nav nav-treeview" style="display: block;">
+        //                                 ${departmentName}
+        //                             </ul>
+        //                         </li>   
+        //                 `;
+        //             }
+        //         }
+        //     }
+        //     $('#contentContainer').html(data)
+        // })
     // Call Function
 
     // Operation
@@ -150,6 +150,19 @@
                 onChange('selectLocaion','locationId')
             })
         // Location
+
+        // Testing
+        PSPDFKit.load({
+            container: "#pspdfkit",
+            document: `{{asset('storage/DigitalBook/PS ICT.01.pdf')}}` // Add the path. to your document here
+        })
+        .then(function(instance) {
+            console.log("PSPDFKit loaded", instance);
+        })
+        .catch(function(error) {
+            console.error(error.message);
+        });
+        // Testing
     // Operation
 
     // Function

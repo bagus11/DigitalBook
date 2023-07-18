@@ -15,6 +15,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use \Mpdf\Mpdf as PDF;
 
 class DigitalBookController extends Controller
 {
@@ -140,8 +141,6 @@ class DigitalBookController extends Controller
         ]); 
     }
     function addDigitalBookDetail(Request $request, StoreDigitalBookDetailRequest $storeDigitalBookDetailRequest){
-        require_once('pdfwatermarker/pdfwatermarker.php');
-        require_once('pdfwatermarker/pdfwatermark.php');
         try {
             $storeDigitalBookDetailRequest->validated(); 
             $fileName           = '';
@@ -211,19 +210,21 @@ class DigitalBookController extends Controller
                 ]);
 
             if($request->hasFile('dbAttachment')){
-                $request->file('dbAttachment')->storeAs('DigitalBook',$fileName);
-                //Specify path to image. The image must have a 96 DPI resolution.
-                $watermark = new PDFWatermark('COPY');
-                //Set the position
-                $watermark->setPosition('center');
-                //Place watermark behind original PDF content. Default behavior places it over the content.
-                $watermark->setAsBackground();
-                //Specify the path to the existing pdf, the path to the new pdf file, and the watermark object
-                $watermarker = new PDFWatermarker('storage/DigitalBook/'.$fileName,$watermark); 
-                //Set page range. Use 1-based index.
-                $watermarker->setPageRange(1,5);
-                //Save the new PDF to its specified location
-                $watermarker->savePdf(); 
+                $uploadFile = $request->file('dbAttachment')->storeAs('DigitalBook','test.pdf');
+                if($uploadFile){
+                    $mpdf = new PDF();
+                    $pagecount = $mpdf ->setSourceFile('storage/DigitalBook/test.pdf');
+                    for($i=1; $i <= $pagecount; $i++) {   
+                        $import_page = $mpdf->ImportPage($i);
+                        $mpdf->addPage();
+                        $mpdf->useTemplate($import_page);
+                        $mpdf->SetWatermarkText('COPY');
+                        $mpdf->showWatermarkText = true;
+                   }   
+                  
+                    $mpdf->Output('storage/DigitalBook/'.$fileName);
+                }
+                Storage::delete('DigitalBook/test.pdf');
             }
             return ResponseFormatter::success(                                
                 $storeDigitalBookDetailRequest,
@@ -245,8 +246,7 @@ class DigitalBookController extends Controller
     }
     
     function updateDigitalBookDetail(Request $request, UpdateDigitalBookDetailRequest $updateDigitalBookDetailRequest) {
-        require_once('pdfwatermarker/pdfwatermarker.php');
-        require_once('pdfwatermarker/pdfwatermark.php');
+    
         try {
             $updateDigitalBookDetailRequest->validated(); 
             $fileName           = '';
@@ -265,19 +265,22 @@ class DigitalBookController extends Controller
                    // Setup name for attachmentx`
 
                    Storage::move($attachmentExplode[1].'/'.$attachmentExplode[2], 'DigitalBookHistory/'.'Del '.$fileNameDel);
-                   $request->file('dbdAttachment')->storeAs('DigitalBook',$fileName);
-                        //Specify path to image. The image must have a 96 DPI resolution.
-                        $watermark = new PDFWatermark('COPY');
-                        //Set the position
-                        $watermark->setPosition('center');
-                        //Place watermark behind original PDF content. Default behavior places it over the content.
-                        $watermark->setAsBackground();
-                        //Specify the path to the existing pdf, the path to the new pdf file, and the watermark object
-                        $watermarker = new PDFWatermarker('storage/DigitalBook/'.$fileName,$watermark); 
-                        //Set page range. Use 1-based index.
-                        $watermarker->setPageRange(1,5);
-                        //Save the new PDF to its specified location
-                        $watermarker->savePdf(); 
+                  $uploadFile =  $request->file('dbdAttachment')->storeAs('DigitalBook','test2.pdf');
+                  if($uploadFile){
+                    $mpdf = new PDF();
+                    $pagecount = $mpdf ->setSourceFile('storage/DigitalBook/test2.pdf');
+                    for($i=1; $i <= $pagecount; $i++) {   
+                        $import_page = $mpdf->ImportPage($i);
+                        $mpdf->addPage();
+                        $mpdf->useTemplate($import_page);
+                        $mpdf->SetWatermarkText('COPY');
+                        $mpdf->showWatermarkText = true;
+                   }   
+                  
+                    $mpdf->Output('storage/DigitalBook/'.$fileName);
+                  }
+                  Storage::delete('DigitalBook/test2.pdf');
+                     
                }
                 $update             = DigitalBookDetail::where('detailCode',$request->detailCode)
                                                         ->update([
@@ -286,10 +289,10 @@ class DigitalBookController extends Controller
                                                                 'attachment'    => $fileName != null ? 'storage/DigitalBook/'.$fileName : $digitalBookDetail->attachment
                                                         ]);
                 if($update){
-                    $attachmentLabel = $fileName != null ? 'updated' : '';
+                    $attachmentLabel = $fileName != null ? 'storage/DigitalBookHistory/Del '.$fileNameDel : '';
                     DigitalBookDetailLog::create([
                         'detailCode'    => $request->detailCode,
-                        'attachment'    =>  'storage/DigitalBookHistory/'.$attachmentLabel,
+                        'attachment'    => $attachmentLabel,
                         'userId'        => auth()->user()->id,
                         'message'       => "title : $request->dbdTitle \n description : $request->dbdDescription \n attachment : "
                     ]);
