@@ -581,7 +581,7 @@
                 $('#digitalBookDetailLogTable').DataTable({
                     scrollX     : false,
                     scrollY     :280,
-                }).columns.adjust()
+                })
             }
         // Mapping Log
     // Function

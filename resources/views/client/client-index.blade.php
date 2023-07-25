@@ -85,7 +85,8 @@
          </div>
     </div>
     <div class="row">
-        <div id="pspdfkit" style="height: 100vh !important;width:100%"></div>
+        
+        <embed src="{{asset('storage/DigitalBook/PS ICT.01.pdf')}}" height="1000vh" width="100%"type='application/pdf'>
     </div>
  </div>
 @endsection

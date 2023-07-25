@@ -42,7 +42,7 @@
                                     <span id="dbdLocationLb"></span>
                                 </div>
                                 <div class="col-2 mt-2">
-                                    <p>Iso</p>
+                                    <p>ISO</p>
                                 </div>
                                 <div class="col-4 mt-2">
                                     <span id="dbdIsoLb"></span>

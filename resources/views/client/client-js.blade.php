@@ -150,19 +150,7 @@
                 onChange('selectLocaion','locationId')
             })
         // Location
-
-        // Testing
-        PSPDFKit.load({
-            container: "#pspdfkit",
-            document: `{{asset('storage/DigitalBook/PS ICT.01.pdf')}}` // Add the path. to your document here
-        })
-        .then(function(instance) {
-            console.log("PSPDFKit loaded", instance);
-        })
-        .catch(function(error) {
-            console.error(error.message);
-        });
-        // Testing
+            
     // Operation
 
     // Function
