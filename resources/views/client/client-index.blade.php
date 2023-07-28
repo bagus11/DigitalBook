@@ -74,9 +74,14 @@
                  </div>
                  <div class="card-body">
                     <div class="row">
-                        <div class="col-12 col-sm-12 col-md-6">
+                        <div class="col-12 col-sm-12 col-md-4">
                             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false" id="contentContainer">
                             </ul>
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-8">
+                            <div id="detailContainer">
+
+                            </div>
                         </div>
                     </div>
                  </div>
@@ -84,10 +89,7 @@
              </div>
          </div>
     </div>
-    <div class="row">
-        
-        <embed src="{{asset('storage/DigitalBook/PS ICT.01.pdf')}}" height="1000vh" width="100%"type='application/pdf'>
-    </div>
+    
  </div>
 @endsection
 @push('custom-js')

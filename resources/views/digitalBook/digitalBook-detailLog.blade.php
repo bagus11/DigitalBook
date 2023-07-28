@@ -84,7 +84,7 @@
                             </div>
                         </div>
                         <div class="card-body">
-                            <table class="datatable-bordered nowrap display" id="digitalBookDetailLogTable">
+                            <table class="datatable-stepper nowrap display">
                                 <thead>
                                     <tr>
                                         <th style="text-align: center;">Created At</th>
@@ -93,6 +93,7 @@
                                         <th style="text-align: center;">Attachment</th>
                                     </tr>
                                 </thead>
+                                <tbody id="digitalBookDetailLogTable"></tbody>
                             </table>    
                         </div>
                     </div>  

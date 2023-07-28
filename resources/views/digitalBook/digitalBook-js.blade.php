@@ -549,8 +549,7 @@
 
         // Mapping Log
             function mappingLog(response){
-                $('#digitalBookDetailLogTable').DataTable().clear();
-                $('#digitalBookDetailLogTable').DataTable().destroy();
+                $('#digitalBookDetailLogTable').html('');
                 var data =''
                 for(i = 0; i < response.length; i++){
                     const d = new Date(response[i].created_at)
@@ -577,11 +576,7 @@
                         </tr>
                     `;
                 }
-                $('#digitalBookDetailLogTable > tbody:first').html(data)
-                $('#digitalBookDetailLogTable').DataTable({
-                    scrollX     : false,
-                    scrollY     :280,
-                })
+                $('#digitalBookDetailLogTable').html(data)
             }
         // Mapping Log
     // Function

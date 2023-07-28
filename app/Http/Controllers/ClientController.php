@@ -23,4 +23,5 @@ class ClientController extends Controller
             'data'=>$data,
         ]);  
     }
+    
 }

@@ -171,6 +171,18 @@
             }
         }); 
     }
+    function getCallbackNoLoading(route,data,callback){
+        $.ajax({
+        url: route,
+        type: "get",
+        dataType: 'json',
+        data:data,
+        success: callback,
+        error: function(xhr, status, error) {
+            toastr['error']('Failed to get data, please contact ICT Developer');
+            }
+        }); 
+    }
     function postAttachment(route,data,withFile,callback){
         $.ajax({
                 url: route,

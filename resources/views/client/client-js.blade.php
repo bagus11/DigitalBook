@@ -1,73 +1,7 @@
 <script>
 
     // Call Function
-        // getCallback('getDitialBookClient','',function(response){
-        //     swal.close()
-        //     $('#contentContainer').empty()
-        //     var data =''
-        //     var departmentName=''  
-        //     var detailBook =''         
-        //     if(response.data){
-        //         for(i = 0 ;i < response.data.length; i++){
-        //             var digital_relation =response.data[i].digital_relation 
-        //             if(digital_relation.length > 0){ 
-        //                 // Departement Relation
-        //                 var departmentRelation = response.data[i].departement_relation
-        //                 for(j = 0 ; j < departmentRelation.length; j++){
-        //                     // Digital Header
-        //                         var digitalHeader = departmentRelation[j].digital_relation
-        //                         if(digitalHeader.length > 0){
-        //                             for(k = 0; k < digitalHeader.length; k++){
-        //                                 // Detail Digital
-        //                                     var detailName = digitalHeader[k].detail_relation
-        //                                     if(detailName.length > 0){
-        //                                         for(l = 0 ; l < detailName.length; l++){
-        //                                             var detailLabel = detailName[l].detailCode
-        //                                             detailBook +=`
-        //                                                 <li class="nav-item" style="width:100%">
-        //                                                     <a href="" class="nav-link ml-5">
-        //                                                         <p>${detailLabel}</p>
-        //                                                     </a>
-        //                                                 </li>
-        //                                            `;
-        //                                         }
-    
-        //                                     }
-        //                                 // Detail Digital
-        //                             }
-        //                         }else{
-        //                             alert('test')
-        //                             detailBook.empty()
-        //                         }
-        //                     // Digital Header
-
-        //                     departmentName +=`
-        //                                     <li class="nav-item" style="width:100%" >
-        //                                         <a href="#" class="nav-link ml-3">
-        //                                             <p>${departmentRelation[j].name}<i class="right fas fa-angle-left"></i></p>
-        //                                         </a>
-        //                                         <ul class="nav nav-treeview">
-        //                                             ${detailBook}
-        //                                         </ul>
-        //                                     </li>
-        //                     `;
-        //                 }   
-        //                 // Departement Relation   
-        //                 data +=`
-        //                         <li class="nav-item menu-is-opening menu-open">
-        //                             <a href="#" class="nav-link ">
-        //                                 <p>${response.data[i].name}<i class="right fas fa-angle-left"></i></p>
-        //                             </a>
-        //                             <ul class="nav nav-treeview" style="display: block;">
-        //                                 ${departmentName}
-        //                             </ul>
-        //                         </li>   
-        //                 `;
-        //             }
-        //         }
-        //     }
-        //     $('#contentContainer').html(data)
-        // })
+        
     // Call Function
 
     // Operation
@@ -150,10 +84,149 @@
                 onChange('selectLocaion','locationId')
             })
         // Location
-            
-    // Operation
+        $(document).on('click', 'li.departmentSubmenus', function(e) {
+            e.preventDefault();
+            var requestcode = $(this).data('requestcode')
+            var id = $(this).data('id')
+            var data={
+                'requestCode':requestcode
+            }
+            getCallbackNoLoading('getDigitalBookDetail',data,function(response){
+                $('.departmentContainer'+id).empty()
+                for(i=0; i < response.data.length; i++){
+                    $('.departmentContainer'+id).append(`
+                        <li class="nav-item detailCodeButton" data-detailcode="${response.data[i].detailCode}" style="width:100%" >
+                            <a href="#" class="nav-link ml-5 ">
+                              ${response.data[i].detailCode}
+                            </a>
+                        </li>
+                    `);
+                }
+            })  
+        })    
+        $(document).on('click','li.detailCodeButton',function(e){
+            e.preventDefault()
+            var detailcode = $(this).data('detailcode')
+            var data={'detailCode':detailcode}
+            getCallback('detailDigitalBook',data,function(response){
+                swal.close()
+                console.log(response.data)
+                $('#detailContainer').empty()
+                $('#detailContainer').append(`
+                <div class="card card-danger card-outline">
+                    <div class="card-header">
+                        ${detailcode}
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-2">
+                                Title 
+                            </div>
+                            <div class="col-4">
+                                : ${response.data.title}
+                            </div>
 
+                            <div class="col-2">
+                                Type  
+                            </div>
+                            <div class="col-4">
+                                : ${response.data.type ==1 ? "PS" : "IK"}
+                            </div>
+                        </div>   
+                               
+                        <div class="row">
+                            <div class="col-2">
+                                Location 
+                            </div>
+                            <div class="col-4">
+                                : ${response.data.location_relation.name}
+                            </div>
+
+                            <div class="col-2">
+                                ISO  
+                            </div>
+                            <div class="col-4">
+                                : ${response.data.iso_relation.name}
+                            </div>
+                        </div>   
+
+                        <div class="row">
+                            <div class="col-2">
+                                Description 
+                            </div>
+                            <div class="col-10">
+                                : ${response.data.description}
+                            </div>
+                        </div> 
+                        <br/>
+                        <div class="card collapsed-card">
+                            <div class="card-header bg-secondaryClient">
+                                Attachment
+                                <div class="card-tools">
+                                    <button type="button" class="btn btn-sm" data-card-widget="collapse" title="Collapse">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="row mt-2"> 
+                                    <embed src="{{asset('${response.data.attachment}')}}" height="800vh" width="100%"type='application/pdf'>
+                                </div> 
+                            </div>
+                        </div>
+                      
+                    </div>
+                </div>
+                `)
+            })
+        })  
+    // Operation
     // Function
+        getCallback('getDitialBookClient','',function(response){
+            swal.close()
+            $('#contentContainer').empty()
+            var data =''
+            var departmentName=''  
+            var detailBook =''         
+            if(response.data){
+                for(i = 0 ;i < response.data.length; i++){
+                    var digital_relation =response.data[i].digital_relation 
+                    if(digital_relation.length > 0){ 
+                        // Departement Relation
+                            var departmentRelation = response.data[i].departement_relation
+                            for(j = 0 ; j < departmentRelation.length; j++){
+                              
+                                // Digital Header
+                                    var digitalHeader = departmentRelation[j].digital_relation
+                                    var requestCode = digitalHeader[0] ==null ?'': digitalHeader[0].requestCode
+                                // Digital Header
+                                departmentName +=`
+                                                <li class="nav-item departmentSubmenus" data-id="${departmentRelation[j] ==null ? '' :departmentRelation[j].id}" data-requestcode="${digitalHeader ==null ? '' :requestCode}" style="width:100%" >
+                                                    <a href="#" class="nav-link ml-3 ">
+                                                        ${departmentRelation[j].name}<i class="right fas fa-angle-left"></i>
+                                                    </a>
+                                                    <ul class="nav nav-treeview departmentContainer${departmentRelation[j].id}">
+                                                      
+                                                    </ul>
+                                                </li>
+                                `;
+                        }   
+                        // Departement Relation   
+                        data +=`
+                                <li class="nav-item menu-is-opening menu-open">
+                                    <a href="#" class="nav-link ">
+                                        <p>${response.data[i].name}<i class="right fas fa-angle-left"></i></p>
+                                    </a>
+                                    <ul class="nav nav-treeview" style="display: block;">
+                                        ${departmentName}
+                                    </ul>
+                                </li>   
+                        `;
+                    }
+                }
+            }
+            $('#contentContainer').html(data)
+        })
     // Function
 
 </script>
