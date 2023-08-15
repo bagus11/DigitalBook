@@ -203,8 +203,7 @@ Auth::routes();
         Route::get('getPICDigitalBook', [DigitalBookController::class, 'getPICDigitalBook'])->name('getPICDigitalBook');
         Route::get('detailDigitalBook', [DigitalBookController::class, 'detailDigitalBook'])->name('detailDigitalBook');
         Route::get('getDigitalBookLog', [DigitalBookController::class, 'getDigitalBookLog'])->name('getDigitalBookLog');
-        Route::get('getDigitalBookByDept', [ClientController::class, 'getDigitalBookByDept'])->name('getDigitalBookByDept');
-        
+      
         Route::get('getDitialBookClient', [ClientController::class, 'getDitialBookClient'])->name('getDitialBookClient');
 
     // Get Active Item

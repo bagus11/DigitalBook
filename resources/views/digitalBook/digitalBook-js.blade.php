@@ -396,11 +396,12 @@
                             var data =''
                         
                             for(i = 0; i < response.length; i++){
+                                console.log(response[i].user_relation)
                                 data +=`
                                     <tr>
                                         <td style="text-align:center;"><input type="checkbox" class="checkedActive" value="${response[i].userId}" data-user_id="${response[i].userId}"></td>
                                         <td style="text-align:left;">${response[i].user_relation.name}</td>
-                                        <td style="text-align:left;">${response[i].user_relation != null ? response[i].user_relation.title_relation.name : '-'}</td>
+                                        <td style="text-align:left;">${response[i].user_relation.title_relation != null ? response[i].user_relation.title_relation.name : '-'}</td>
                                     </tr>
                                 `;
                             }

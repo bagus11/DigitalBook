@@ -1,6 +1,13 @@
-<aside class="main-sidebar sidebar-dark-danger elevation-4" style="background:#146C94">
+<aside class="main-sidebar sidebar-dark-danger elevation-4" style="background:#009241">
     <a href="{{route('/')}}" class="brand-link">
-      <b>Digital Book</b>
+        <div class="row" style="width: 90%">
+            <div class="col-4">
+                <img src="{{asset('hseIcon.png')}}" width="70px" style="display:block" alt="">
+            </div>
+            <div class="col-6 mt-3">
+                <b>DigitalBook</b>
+            </div>
+        </div>
     </a>
     <div class="sidebar">
         

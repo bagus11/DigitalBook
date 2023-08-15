@@ -86,22 +86,29 @@
         // Location
         $(document).on('click', 'li.departmentSubmenus', function(e) {
             e.preventDefault();
+            console.log(e.currentTarget)
             var requestcode = $(this).data('requestcode')
             var id = $(this).data('id')
             var data={
-                'requestCode':requestcode
+                'id':id
             }
-            getCallbackNoLoading('getDigitalBookDetail',data,function(response){
+            alert(id)
+            getCallbackNoLoading('getDigitalBook',data,function(response){
                 $('.departmentContainer'+id).empty()
+                data=''
                 for(i=0; i < response.data.length; i++){
-                    $('.departmentContainer'+id).append(`
+                    data +=`
                         <li class="nav-item detailCodeButton" data-detailcode="${response.data[i].detailCode}" style="width:100%" >
                             <a href="#" class="nav-link ml-5 ">
                               ${response.data[i].detailCode}
                             </a>
+                            <ul class="nav nav-treeview departmentContainer${response.data[i].detailCode}">
+                                
+                            </ul>
                         </li>
-                    `);
+                    `;
                 }
+                $('.departmentContainer'+id).append(data)
             })  
         })    
         $(document).on('click','li.detailCodeButton',function(e){
@@ -180,6 +187,34 @@
                 `)
             })
         })  
+        $(document).on('click','li.divMenus', function(e){
+            e.preventDefault()
+            console.log(e.currentTarget)
+            var divId = $(this).data('divid');
+            getCallbackNoLoading('DepartementByDiv',{'id':divId},function(response){
+                $('#divMenusContainer'+divId).empty();
+              
+                var data=''
+                for(i = 0 ; i < response.data.length; i++){
+                    // Digital Header
+                        var digitalHeader = response.data[i].digital_relation
+                        // var requestCode = digitalHeader[0] ==null ?'': digitalHeader[0].requestCode
+                    // Digital Header
+                        data +=`
+                            <li class="nav-item departmentSubmenus" data-id="${response.data[i] ==null ? '' :response.data[i].id}" style="width:100%" >
+                                <a href="#" class="nav-link ml-3 ">
+                                    ${response.data[i].name}<i class="right fas fa-angle-left"></i>
+                                </a>
+                                <ul class="nav nav-treeview departmentContainer${response.data[i].id}">
+                                
+                                </ul>
+                            </li>
+                        `;
+                }
+
+                $('#divMenusContainer'+divId).append(data)
+            })
+        })
     // Operation
     // Function
         getCallback('getDitialBookClient','',function(response){
@@ -192,33 +227,13 @@
                 for(i = 0 ;i < response.data.length; i++){
                     var digital_relation =response.data[i].digital_relation 
                     if(digital_relation.length > 0){ 
-                        // Departement Relation
-                            var departmentRelation = response.data[i].departement_relation
-                            for(j = 0 ; j < departmentRelation.length; j++){
-                              
-                                // Digital Header
-                                    var digitalHeader = departmentRelation[j].digital_relation
-                                    var requestCode = digitalHeader[0] ==null ?'': digitalHeader[0].requestCode
-                                // Digital Header
-                                departmentName +=`
-                                                <li class="nav-item departmentSubmenus" data-id="${departmentRelation[j] ==null ? '' :departmentRelation[j].id}" data-requestcode="${digitalHeader ==null ? '' :requestCode}" style="width:100%" >
-                                                    <a href="#" class="nav-link ml-3 ">
-                                                        ${departmentRelation[j].name}<i class="right fas fa-angle-left"></i>
-                                                    </a>
-                                                    <ul class="nav nav-treeview departmentContainer${departmentRelation[j].id}">
-                                                      
-                                                    </ul>
-                                                </li>
-                                `;
-                        }   
-                        // Departement Relation   
                         data +=`
-                                <li class="nav-item menu-is-opening menu-open">
+                                <li class="nav-item divMenus" data-divId="${response.data[i].id}">
                                     <a href="#" class="nav-link ">
                                         <p>${response.data[i].name}<i class="right fas fa-angle-left"></i></p>
                                     </a>
-                                    <ul class="nav nav-treeview" style="display: block;">
-                                        ${departmentName}
+                                    <ul class="nav nav-treeview" id="divMenusContainer${response.data[i].id}">
+                                       
                                     </ul>
                                 </li>   
                         `;

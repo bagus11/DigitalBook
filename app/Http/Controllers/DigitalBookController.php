@@ -22,8 +22,10 @@ class DigitalBookController extends Controller
     function index(){
         return view('digitalBook.digitalBook-index');
     }
-    function getDigitalBook(){
-        $data = DigitalBookHeader::with(['detailRelation','departementRelation','departementRelation.divisionRelation'])->get();
+    function getDigitalBook(Request $request){
+        $data = DigitalBookHeader::with(['detailRelation','departementRelation','departementRelation.divisionRelation'])
+        ->where('deptId','like','%'.$request->id.'%')
+        ->get();
         return response()->json([
             'data'=>$data,
         ]);  
