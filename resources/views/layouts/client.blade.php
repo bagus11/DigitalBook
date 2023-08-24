@@ -13,10 +13,10 @@
         <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
    
     </head>
-    <body class="hold-transition sidebar-mini">
+    <body class="hold-transition layout-top-nav">
         <div class="wrapper">
         @include('layouts.client.navbar')
-        @include('layouts.client.sidebar')
+        {{-- @include('layouts.client.sidebar') --}}
 
         <div class="content-wrapper py-4">
             @yield('content')

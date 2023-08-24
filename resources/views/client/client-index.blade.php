@@ -75,8 +75,28 @@
                  <div class="card-body">
                     <div class="row">
                         <div class="col-12 col-sm-12 col-md-4">
-                            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false" id="contentContainer">
-                            </ul>
+                           
+                                <nav>
+                                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                                        @foreach ($data as $item)
+                                                <li class="nav-item">
+                                                     <a href="#" class="nav-link">
+                                                        <p>{{$item->name}}<i class="right fas fa-angle-left"></i></p>
+                                                    </a>
+                                                    <ul class="nav nav-treeview">
+                                                        @foreach ($item->departementRelation as $row)
+                                                            <li class="nav-item" style="width:100%">
+                                                                <a href="#" class="nav-link ml-3">
+                                                                    {{$row->name}}<i class="right fas fa-angle-left"></i>
+                                                                </a>
+                                                            </li>
+                                                        @endforeach
+                                                    </ul>
+                                                </li>   
+                                        @endforeach
+                                    </ul>
+                                </nav>
+                           
                         </div>
                         <div class="col-12 col-sm-12 col-md-8">
                             <div id="detailContainer">
@@ -91,6 +111,9 @@
     </div>
     
  </div>
+
+
+
 @endsection
 @push('custom-js')
     @include('client.client-js')

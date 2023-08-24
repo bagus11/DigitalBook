@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateClientMenusesTable extends Migration
+class CreateMasterHSEPagesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,13 @@ class CreateClientMenusesTable extends Migration
      */
     public function up()
     {
-        Schema::create('client_menus', function (Blueprint $table) {
+        Schema::create('master_hse_pages', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->integer('type');
-            $table->string('icon');
-            $table->string('link');
-            $table->integer('parentMenu');
+            $table->integer('pageId');
             $table->integer('parentSubmenus');
-            $table->integer('status');
+            $table->string('title');
+            $table->string('Attachment');
+            $table->text('description');
             $table->timestamps();
         });
     }
@@ -33,6 +31,6 @@ class CreateClientMenusesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('client_menus');
+        Schema::dropIfExists('master_hse_pages');
     }
 }

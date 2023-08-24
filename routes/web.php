@@ -1,10 +1,12 @@
 <?php
 
+use App\Http\Controllers\Client\RegulasiHealthController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\DigitalBookController;
 use App\Http\Controllers\MasterCategoriesController;
 use App\Http\Controllers\MasterDepartementController;
 use App\Http\Controllers\MasterDivisionController;
+use App\Http\Controllers\MasterHSEPageController;
 use App\Http\Controllers\MasterISOController;
 use App\Http\Controllers\MasterLocationController;
 use App\Http\Controllers\MasterNewsController;
@@ -173,6 +175,19 @@ Auth::routes();
                 // DigitalBook
                         
             // Main Transaction 
+
+            // Master HSE Page
+                Route::group(['middleware' => ['permission:view-masterHSEPage']], function () {
+                    Route::get('masterHSEPage', [MasterHSEPageController::class, 'index'])->name('masterHSEPage');
+                    // Operation
+                        Route::get('getMasterHSE', [MasterHSEPageController::class, 'getMasterHSE'])->name('getMasterHSE');
+                        Route::get('getClientMenus', [MasterHSEPageController::class, 'getClientMenus'])->name('getClientMenus');
+                        Route::post('addHSEPage', [MasterHSEPageController::class, 'addHSEPage'])->name('addHSEPage');
+                        Route::get('getClientSubmenus', [MasterHSEPageController::class, 'getClientSubmenus'])->name('getClientSubmenus');
+                      
+                    // Operation
+                });
+            // Master HSE Page
     });
 // Admin
 // Client
@@ -205,7 +220,12 @@ Auth::routes();
         Route::get('getDigitalBookLog', [DigitalBookController::class, 'getDigitalBookLog'])->name('getDigitalBookLog');
       
         Route::get('getDitialBookClient', [ClientController::class, 'getDitialBookClient'])->name('getDitialBookClient');
+        // Get Active Item
+        
+        // Client Page
+            Route::get('regulasiHealth', [RegulasiHealthController::class, 'index'])->name('regulasiHealth');
+            Route::get('implementasiKesehatan', [RegulasiHealthController::class, 'index'])->name('implementasiKesehatan');
 
-    // Get Active Item
+        // Client Page
 // Client
 

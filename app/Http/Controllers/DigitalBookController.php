@@ -159,7 +159,7 @@ class DigitalBookController extends Controller
 
             // Setup Detail Code
                 if($request->dbLocationId == 3){
-                    $lastRecord         = DigitalBookDetail::with('headerRelation','headerRelation.departementRelation')->whereHas('headerRelation', function($query) use($departementId){
+                    $lastRecord             = DigitalBookDetail::with('headerRelation','headerRelation.departementRelation')->whereHas('headerRelation', function($query) use($departementId){
                                                                     $query->where('deptId',$departementId->deptId);})
                                                                 ->where('type',$request->dbTypeId)
                                                                 ->where('locationId',$request->dbLocationId)    
@@ -174,8 +174,8 @@ class DigitalBookController extends Controller
                         $detailCode         = $typeName.' '.$departementId->departementRelation->initial.'.'.'01'.'-K';
                     } 
                 }else{
-                    $lastRecord         = DigitalBookDetail::with('headerRelation','headerRelation.departementRelation')->whereHas('headerRelation', function($query) use($departementId){
-                                                                $query->where('deptId',$departementId->deptId);})
+                    $lastRecord             = DigitalBookDetail::with('headerRelation','headerRelation.departementRelation')->whereHas('headerRelation', function($query) use($departementId){
+                                                            $query->where('deptId',$departementId->deptId);})
                                                             ->where('type',$request->dbTypeId)
                                                             ->where('locationId','!=', 3)    
                                                             ->orderBy('id','desc')

@@ -14,10 +14,38 @@
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 @php
-                    $menus = DB::connection('mysql2')->table('master_division')->get();
+                    $menus = DB::table('client_menus')->get();
                 @endphp
+                
                 @foreach ($menus as $item)
-                    
+                  @if ($item->type == 1)
+                        <li class="nav-item">
+                                <a href="{{$item->link}}" class="nav-link">
+                                    <i class="nav-icon {{$item->icon}}"></i>
+                                    <p>{{$item->name}}</p>
+                                </a>
+                        </li>
+                    @elseif($item->type == 2)
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon {{$item->icon}}"></i>
+                                <p>{{$item->name}}<i class="right fas fa-angle-left"></i></p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                @php
+                                    $submenus = DB::table('client_menus')->where('parentMenu', $item->id)->get();
+                                @endphp
+                                @foreach ($submenus as $row)
+                                    <li class="nav-item" style="width:100%">
+                                        <a href="{{$row->link}}" class="nav-link ml-3">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>{{$row->name}}<i class="right fas fa-angle-left"></i></p>
+                                        </a>
+                                    </li>
+                                @endforeach
+                            </ul>
+                        </li> 
+                    @endif
                 @endforeach
             </ul>
         </nav>

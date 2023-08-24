@@ -9,9 +9,6 @@ use Illuminate\Http\Request;
 class ClientController extends Controller
 {
     function index(){
-        return view('client.client-index');
-    }
-    function getDitialBookClient(Request $request) {
         $data =MasterDivision::with([
             'digitalRelation',
             'departementRelation',
@@ -19,9 +16,9 @@ class ClientController extends Controller
             'digitalRelation.detailRelation',
             'departementRelation.digitalRelation.detailRelation'
         ])->get();
-        return response()->json([
-            'data'=>$data,
-        ]);  
-    }
-    
+        $getData=[
+            'data'=>$data  
+        ];
+        return view('client.client-index', $getData);
+    }  
 }
