@@ -225,6 +225,17 @@ Auth::routes();
         // Client Page
             Route::get('regulasiHealth', [RegulasiHealthController::class, 'index'])->name('regulasiHealth');
             Route::get('implementasiKesehatan', [RegulasiHealthController::class, 'index'])->name('implementasiKesehatan');
+            Route::get('pelaporanHealth', [RegulasiHealthController::class, 'index'])->name('pelaporanHealth');
+            Route::get('regulasiSafety', [RegulasiHealthController::class, 'index'])->name('regulasiSafety');
+            Route::get('meetingBulanan', [RegulasiHealthController::class, 'index'])->name('meetingBulanan');
+            Route::get('peralatanSafety', [RegulasiHealthController::class, 'index'])->name('peralatanSafety');
+            Route::get('tanggapDarurat', [RegulasiHealthController::class, 'index'])->name('tanggapDarurat');
+            Route::get('pelaporanTriwulan', [RegulasiHealthController::class, 'index'])->name('pelaporanTriwulan');
+            Route::get('regulasiEnvironment', [RegulasiHealthController::class, 'index'])->name('regulasiEnvironment');
+            Route::get('plb3', [RegulasiHealthController::class, 'index'])->name('plb3');
+            Route::get('plcd', [RegulasiHealthController::class, 'index'])->name('plcd');
+            Route::get('kedaruratan', [RegulasiHealthController::class, 'index'])->name('kedaruratan');
+            Route::get('pelaporanEnvironment', [RegulasiHealthController::class, 'index'])->name('pelaporanEnvironment');
 
         // Client Page
 // Client

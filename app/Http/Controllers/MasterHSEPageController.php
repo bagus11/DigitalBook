@@ -35,8 +35,9 @@ class MasterHSEPageController extends Controller
         ]);  
     }
     function addHSEPage(Request $request, AddHSEPageRequest $addHSEPageRequest){
-        try {    
+        // try {    
             $addHSEPageRequest->validated();
+            $fileName ='';
             $clientMenusId = ClientMenus::with('menusRelation')->where('id',$request->idParentMenus)->first();
             if($request->file('attachmentHSE')){
                 $customName = $request->idParentMenus.'-'.date('YmdHis');
@@ -50,7 +51,7 @@ class MasterHSEPageController extends Controller
                     'title'=>$request->titleHSE,
                     'attachment'=>'',
                     'description'=>$request->descriptionHSE,
-                    'attachment' =>  $fileName != ''? 'storage/attachmentHSE/'.$fileName  : null,
+                    'attachment' =>  $fileName != ''? 'storage/attachmentHSE/'.$fileName  : '',
                 ];
                 
                 MasterHSEPage::create($post);
@@ -58,28 +59,40 @@ class MasterHSEPageController extends Controller
                     $request->file('attachmentHSE')->storeAs('/attachmentHSE',$fileName);
                 }
             }else{
-                $post =[
-                    'parentSubmenus'=>$clientMenusId->menusRelation->id,
-                    'title'=>$request->titleHSE,
-                    'attachment'=>'',
-                    'description'=>$request->descriptionHSE,
-                    'attachment' =>  $fileName != ''? 'storage/attachmentHSE/'.$fileName  : null,
-                ];
-                  MasterHSEPage::where('pageId',$request->idParentMenus)->update($post);
-                  if($request->file('attachmentHSE')){
+                if($request->file('attachmentHSE')){
+                   
+                    $post =[
+                        'parentSubmenus'=>$clientMenusId->menusRelation->id,
+                        'title'=>$request->titleHSE,
+                        'attachment'=>'',
+                        'description'=>$request->descriptionHSE,
+                        'attachment' =>'storage/attachmentHSE/'.$fileName,
+                    ];
                     $request->file('attachmentHSE')->storeAs('/attachmentHSE',$fileName);
+                }else{
+                    $dataOld = MasterHSEPage::where('pageId',$request->idParentMenus)->first();
+                    $post =[
+                        'parentSubmenus'=>$clientMenusId->menusRelation->id,
+                        'title'=>$request->titleHSE,
+                        'attachment'=>'',
+                        'description'=>$request->descriptionHSE,
+                        'attachment' =>$dataOld->Attachment
+                    ];
+                    // dd($post);
                 }
+                  MasterHSEPage::where('pageId',$request->idParentMenus)->update($post);
+               
             }
             return ResponseFormatter::success(   
                 $request,                              
                 'HSE Page successfully updated'
             );            
-        } catch (\Throwable $th) {
-            return ResponseFormatter::error(
-                $th,
-                'HSE Page failed to add',
-                500
-            );
-        }
+        // } catch (\Throwable $th) {
+        //     return ResponseFormatter::error(
+        //         $th,
+        //         'HSE Page failed to add',
+        //         500
+        //     );
     }
+
 }

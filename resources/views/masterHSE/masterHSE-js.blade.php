@@ -69,7 +69,8 @@
                 img = new Image();
                 img.onload = function() {
                     var ratio = this.width / this.height;
-                    if (ratio.toFixed(1) == 3.2 || ratio.toFixed(1) == 3.1 || ratio.toFixed(1) == 3.0) {
+                    console.log(ratio)
+                    if (ratio.toFixed(1) == 3.2 || ratio.toFixed(1) == 3.1 || ratio.toFixed(1) == 3.0 ||ratio.toFixed(1) == 1.4 || ratio.toFixed(1) == 1.5) {
                         $('#addPageHSE').prop('disabled', false);
                         $('.attachmentHSE_error').html('');
                     } else {
