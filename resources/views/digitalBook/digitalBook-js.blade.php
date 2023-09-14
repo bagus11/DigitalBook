@@ -396,7 +396,7 @@
                             var data =''
                         
                             for(i = 0; i < response.length; i++){
-                                console.log(response[i].user_relation)
+                                
                                 data +=`
                                     <tr>
                                         <td style="text-align:center;"><input type="checkbox" class="checkedActive" value="${response[i].userId}" data-user_id="${response[i].userId}"></td>

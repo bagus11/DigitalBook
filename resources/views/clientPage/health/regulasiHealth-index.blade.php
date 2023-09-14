@@ -3,7 +3,7 @@
 @section('content')
  <!-- slider Area Start-->
 
- <div class="slider-area" style="background-image: url({{ asset($data->Attachment) }}); height:400px;margin-top:-25px">
+ <div class="slider-area" style="background-image: url({{ asset($data->Attachment) }}); height:450px;margin-top:-25px;width:2000px !important">
   {{-- <h3 style="margin: auto">{{$data->title}}</h3> --}}
 </div>
 <div class="mt-4 container">
@@ -16,6 +16,11 @@
                <p style="card-text">
                     <?= $data->description ?>
                </p>
+               <br>
+               <div class="mt-3">
+                <embed src="{{asset($data->attachmentPDF)}}" width="100%" height="700" type="application/pdf">
+               </div>
+              
             </div>
           </div>
         </div>

@@ -34,6 +34,7 @@ class AddHSEPageRequest extends FormRequest
                 'titleHSE'      =>'required',
                 'clientMenusId' =>'required',
                 'descriptionHSE'=>'required',
+                'idParentMenus' =>'required','unique:master_hse_pages,pageId',
                 'attachmentHSE' =>'required'
             ];
         }else{

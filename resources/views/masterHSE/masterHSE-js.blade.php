@@ -53,29 +53,30 @@
             data.append('clientMenusId',$('#clientMenusId').val())
             data.append('descriptionHSE',$('#descriptionHSE').val())
             data.append('attachmentHSE',$('#attachmentHSE')[0].files[0]);
+            data.append('coverAttachmentHSE',$('#coverAttachmentHSE')[0].files[0]);
             postAttachment('addHSEPage',data,false,function(response){
                 swal.close()
                 toastr['success'](response.meta.message);
-                window.location('masterHSEPager')
+                window.location = 'masterHSEPage';
             })
 
         })
       
         var _URL = window.URL || window.webkitURL;
-        $("#attachmentHSE").change(function(e) {
+        $("#coverAttachmentHSE").change(function(e) {
             var file, img;
-            $('.attachmentHSE_error').html('')
+            $('.coverAttachmentHSE_error').html('')
             if ((file = this.files[0])) {
                 img = new Image();
                 img.onload = function() {
                     var ratio = this.width / this.height;
                     console.log(ratio)
-                    if (ratio.toFixed(1) == 3.2 || ratio.toFixed(1) == 3.1 || ratio.toFixed(1) == 3.0 ||ratio.toFixed(1) == 1.4 || ratio.toFixed(1) == 1.5) {
+                    if (ratio.toFixed(1) == 3.2 || ratio.toFixed(1) == 3.1 || ratio.toFixed(1) == 3.0 ||ratio.toFixed(1) == 1.4 || ratio.toFixed(1) == 1.5|| ratio.toFixed(1) == 3.3) {
                         $('#addPageHSE').prop('disabled', false);
-                        $('.attachmentHSE_error').html('');
+                        $('.coverAttachmentHSE_error').html('');
                     } else {
                         alert('test 2')
-                        $('.attachmentHSE_error').html('Image ratio must 3:1');
+                        $('.coverAttachmentHSE_error').html('Image ratio must 3:1');
                         $('#addPageHSE').prop('disabled', true);
                     }
 

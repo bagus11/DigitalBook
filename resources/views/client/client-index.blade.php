@@ -86,6 +86,7 @@
                                                     <ul class="nav nav-treeview">
                                                         @foreach ($item->departementRelation as $row)
                                                             <li class="nav-item" style="width:100%">
+                                                                <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                                                                 <a href="#" class="nav-link ml-3">
                                                                     {{$row->name}}<i class="right fas fa-angle-left"></i>
                                                                 </a>

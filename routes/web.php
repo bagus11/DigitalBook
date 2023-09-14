@@ -236,7 +236,14 @@ Auth::routes();
             Route::get('plcd', [RegulasiHealthController::class, 'index'])->name('plcd');
             Route::get('kedaruratan', [RegulasiHealthController::class, 'index'])->name('kedaruratan');
             Route::get('pelaporanEnvironment', [RegulasiHealthController::class, 'index'])->name('pelaporanEnvironment');
-
+            Route::get('kecelakaanSafety', [RegulasiHealthController::class, 'index'])->name('kecelakaanSafety');
+            Route::get('uklupl', [RegulasiHealthController::class, 'index'])->name('uklupl');
+            Route::get('craneAbus2Ton', [RegulasiHealthController::class, 'index'])->name('craneAbus2Ton');
+            Route::get('forklift', [RegulasiHealthController::class, 'index'])->name('forklift');
+            Route::get('bejana', [RegulasiHealthController::class, 'index'])->name('bejana');
+            Route::get('craneSemiGentri', [RegulasiHealthController::class, 'index'])->name('bejana');
+            Route::get('penyalur', [RegulasiHealthController::class, 'index'])->name('bejana');
+            Route::get('genset', [RegulasiHealthController::class, 'index'])->name('bejana');
         // Client Page
 // Client
 
