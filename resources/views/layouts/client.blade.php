@@ -84,6 +84,10 @@
           $(".select2").select2({ width: '300px', dropdownCssClass: "bigdrop" });
          
        </script>
+        <script src="assets/pspdfkit.js">
+            alert('test')
+        </script>
+       
        <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
        <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
        @include('helper.helper')

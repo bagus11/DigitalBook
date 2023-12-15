@@ -3,7 +3,7 @@
 @section('content')
  <!-- slider Area Start-->
 
- <div class="slider-area" style="background-image: url({{ asset($data->Attachment) }}); height:450px;margin-top:-25px;width:2000px !important">
+ <div class="slider-area" style="background-image: url({{ asset($data->Attachment) }}); height:450px;margin-top:-25px;max-width:2000px !important;object-fit:fit !important">
   {{-- <h3 style="margin: auto">{{$data->title}}</h3> --}}
 </div>
 <div class="mt-4 container">

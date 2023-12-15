@@ -34,6 +34,7 @@
         </div>
        
         <script src="{{asset('js/app.js')}}"></script>
+       
         <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
         <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
         <script src="https://cdn.datatables.net/1.13.1/js/dataTables.bootstrap4.min.js"></script>
@@ -73,7 +74,7 @@
               return Swal.fire({
                   title: title,
                   html: html,
-            customClass: 'swal-wide',
+                  customClass: 'swal-wide',
                   timerProgressBar: true,
                   allowOutsideClick: false,
                   didOpen: () => {

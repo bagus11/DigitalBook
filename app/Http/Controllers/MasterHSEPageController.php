@@ -36,7 +36,7 @@ class MasterHSEPageController extends Controller
     }
     function addHSEPage(Request $request, AddHSEPageRequest $addHSEPageRequest){
         // try {    
-         
+            ini_set('memory_limit','256M');
             $addHSEPageRequest->validated();
             $fileNameAttachment ='';
             $fileCustomName ='';
@@ -61,23 +61,27 @@ class MasterHSEPageController extends Controller
                     'attachment' =>  $fileCustomName != ''? 'storage/attachmentCover/'.$fileCustomName  : '',
                 ];
                 MasterHSEPage::create($post);
-                $content = $request->descriptionHSE;
                 $dom = new \DomDocument();
-                $dom->loadHtml($content, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
-                $imageFile = $dom->getElementsByTagName('img');
-          
-                foreach($imageFile as $item => $image){
-                    $data = $image->getAttribute('src');
-                    list($type, $data) = explode(';', $data);
-                    list(, $data)      = explode(',', $data);
-                    $imgeData = base64_decode($data);
-                    $image_name= "/storage/AttachmentBody/" . time().$item.'.png';
-                    $path = public_path() . $image_name;
-                    file_put_contents($path, $imgeData);
-                    
-                    $image->removeAttribute('src');
-                    $image->setAttribute('src', $image_name);
-                 }
+                $img = $dom->getElementsByTagName('img');
+                if($img){
+                    $content = $request->descriptionHSE;
+                    $dom = new \DomDocument();
+                    $dom->loadHtml($content, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD | LIBXML_NOERROR | LIBXML_NOWARNING);
+                    $imageFile = $dom->getElementsByTagName('img');
+              
+                    foreach($imageFile as $item => $image){
+                        $data = $image->getAttribute('src');
+                        list($type, $data) = explode(';', $data);
+                        list(, $data)      = explode(',', $data);
+                        $imgeData = base64_decode($data);
+                        $image_name= "/storage/AttachmentBody/" . time().$item.'.png';
+                        $path = public_path() . $image_name;
+                        file_put_contents($path, $imgeData);
+                        
+                        $image->removeAttribute('src');
+                        $image->setAttribute('src', $image_name);
+                     }
+                }
                 if($request->file('attachmentHSE')){
                     $request->file('attachmentHSE')->storeAs('/attachmentHSE',$fileNameAttachment);
                 }

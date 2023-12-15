@@ -248,7 +248,7 @@ class DigitalBookController extends Controller
     }
     
     function updateDigitalBookDetail(Request $request, UpdateDigitalBookDetailRequest $updateDigitalBookDetailRequest) {
-    
+        ini_set('memory_limit','256M');
         try {
             $updateDigitalBookDetailRequest->validated(); 
             $fileName           = '';

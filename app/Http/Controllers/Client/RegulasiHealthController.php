@@ -14,6 +14,10 @@ class RegulasiHealthController extends Controller
         $menusId    = ClientMenus::where('link', $currenturl)->first();
         $getData       = MasterHSEPage::where('pageId',$menusId->id)->first();
         $data=['data'=>$getData];
-        return view('clientPage.health.regulasiHealth-index',$data);
+        if($getData != null){
+            return view('clientPage.health.regulasiHealth-index',$data);
+        }else{
+            return view('clientPage.unprogress.unprogress',$data);
+        }
     }
 }

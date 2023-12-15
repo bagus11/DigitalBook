@@ -241,9 +241,22 @@ Auth::routes();
             Route::get('craneAbus2Ton', [RegulasiHealthController::class, 'index'])->name('craneAbus2Ton');
             Route::get('forklift', [RegulasiHealthController::class, 'index'])->name('forklift');
             Route::get('bejana', [RegulasiHealthController::class, 'index'])->name('bejana');
-            Route::get('craneSemiGentri', [RegulasiHealthController::class, 'index'])->name('bejana');
-            Route::get('penyalur', [RegulasiHealthController::class, 'index'])->name('bejana');
-            Route::get('genset', [RegulasiHealthController::class, 'index'])->name('bejana');
+            Route::get('craneSemiGentri', [RegulasiHealthController::class, 'index'])->name('craneSemiGentri');
+            Route::get('penyalur', [RegulasiHealthController::class, 'index'])->name('penyalur');
+            Route::get('genset', [RegulasiHealthController::class, 'index'])->name('genset');
+            Route::get('ahlik3Umum', [RegulasiHealthController::class, 'index'])->name('ahlik3Umum');
+            Route::get('petugasP3K', [RegulasiHealthController::class, 'index'])->name('petugasP3K');
+            Route::get('petugasDamkarKelasD', [RegulasiHealthController::class, 'index'])->name('petugasDamkarKelasD');
+            Route::get('operatorForklift', [RegulasiHealthController::class, 'index'])->name('operatorForklift');
+            Route::get('optOverHeadCrane', [RegulasiHealthController::class, 'index'])->name('optOverHeadCrane');
+            Route::get('optOverHeadCrane', [RegulasiHealthController::class, 'index'])->name('optK3ElevatorEska');
+            Route::get('optGenset', [RegulasiHealthController::class, 'index'])->name('optGenset');
+            Route::get('optJuruLas', [RegulasiHealthController::class, 'index'])->name('optJuruLas');
+            Route::get('neracaLimbah', [RegulasiHealthController::class, 'index'])->name('neracaLimbah');
+            Route::get('craneAbus10Ton', [RegulasiHealthController::class, 'index'])->name('craneAbus10Ton');
+            Route::get('craneEbuCrane', [RegulasiHealthController::class, 'index'])->name('craneEbuCrane');
+            Route::get('craneEbuCrane5', [RegulasiHealthController::class, 'index'])->name('craneEbuCrane5');
+            Route::get('lift', [RegulasiHealthController::class, 'index'])->name('lift');
         // Client Page
 // Client
 
