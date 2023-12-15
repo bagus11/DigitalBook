@@ -20,4 +20,7 @@ class RegulasiHealthController extends Controller
             return view('clientPage.unprogress.unprogress',$data);
         }
     }
+    function phpinfo() {
+        return view('phpinfo');
+    }
 }

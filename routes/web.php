@@ -258,5 +258,8 @@ Auth::routes();
             Route::get('craneEbuCrane5', [RegulasiHealthController::class, 'index'])->name('craneEbuCrane5');
             Route::get('lift', [RegulasiHealthController::class, 'index'])->name('lift');
         // Client Page
+
+
+        Route::get('phpinfo', [RegulasiHealthController::class, 'phpinfo'])->name('phpinfo');
 // Client
 
