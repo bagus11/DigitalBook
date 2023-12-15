@@ -36,7 +36,7 @@ class MasterHSEPageController extends Controller
     }
     function addHSEPage(Request $request, AddHSEPageRequest $addHSEPageRequest){
         // try {    
-            ini_set('memory_limit','256M');
+         
             $addHSEPageRequest->validated();
             $fileNameAttachment ='';
             $fileCustomName ='';
