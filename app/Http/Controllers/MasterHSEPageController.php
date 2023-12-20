@@ -82,12 +82,21 @@ class MasterHSEPageController extends Controller
                         $image->setAttribute('src', $image_name);
                      }
                 }
-                if($request->file('attachmentHSE')){
-                    $request->file('attachmentHSE')->storeAs('/attachmentHSE',$fileNameAttachment);
+                try {
+                    if($request->file('attachmentHSE')){
+                        $request->file('attachmentHSE')->storeAs('/attachmentHSE',$fileNameAttachment);
+                    }
+                    if($request->file('coverAttachmentHSE')){
+                        $request->file('coverAttachmentHSE')->storeAs('/attachmentCover',$fileCustomName);
+                    }
+                } catch (\Exception $e) {
+                    return ResponseFormatter::error(
+                                $e,
+                                'HSE Page failed to add',
+                                500
+                            );
                 }
-                if($request->file('coverAttachmentHSE')){
-                    $request->file('coverAttachmentHSE')->storeAs('/attachmentCover',$fileCustomName);
-                }
+              
             }else{
                 // dd($fileCustomName);
                 $dataOld = MasterHSEPage::where('pageId',$request->idParentMenus)->first();
