@@ -257,6 +257,7 @@ Auth::routes();
             Route::get('craneEbuCrane', [RegulasiHealthController::class, 'index'])->name('craneEbuCrane');
             Route::get('craneEbuCrane5', [RegulasiHealthController::class, 'index'])->name('craneEbuCrane5');
             Route::get('lift', [RegulasiHealthController::class, 'index'])->name('lift');
+            Route::get('neracaLimbahCair', [RegulasiHealthController::class, 'index'])->name('neracaLimbahCair');
         // Client Page
 
 
