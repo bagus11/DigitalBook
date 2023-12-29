@@ -134,7 +134,7 @@ class RolePermissionController extends Controller
         ]); 
     }
     function getUser(){
-        $data = User::all();
+        $data = User::select('*')->orderBy('id')->get();
         return response()->json([
             'data'=>$data,
         ]); 

@@ -11,6 +11,7 @@
         <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
         <link href="https://cdn.datatables.net/1.13.1/css/dataTables.bootstrap4.min.css" rel="stylesheet">
         <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/signature_pad@3.0.0/dist/signature-pad.css">
     </head>
     <body class="hold-transition sidebar-mini">
         <div class="wrapper">
@@ -90,6 +91,8 @@
        <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
        @include('helper.helper')
         @stack('custom-js')
+        <script src="https://cdn.jsdelivr.net/npm/signature_pad@3.0.0/dist/signature_pad.min.js"></script>
+        <script src="{{ asset('js/signature.js') }}"></script>    
  
     </body>
 </html>

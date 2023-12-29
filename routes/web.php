@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Approval\MasterSignatureController;
 use App\Http\Controllers\Client\RegulasiHealthController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\DigitalBookController;
@@ -220,6 +221,12 @@ Auth::routes();
         Route::get('getDigitalBookLog', [DigitalBookController::class, 'getDigitalBookLog'])->name('getDigitalBookLog');
       
         Route::get('getDitialBookClient', [ClientController::class, 'getDitialBookClient'])->name('getDitialBookClient');
+        // Approval
+            // Signature
+                Route::get('masterSignature', [MasterSignatureController::class, 'index'])->name('masterSignature');
+            // Signature
+
+        // Approval
         // Get Active Item
         
         // Client Page
@@ -258,6 +265,7 @@ Auth::routes();
             Route::get('craneEbuCrane5', [RegulasiHealthController::class, 'index'])->name('craneEbuCrane5');
             Route::get('lift', [RegulasiHealthController::class, 'index'])->name('lift');
             Route::get('neracaLimbahCair', [RegulasiHealthController::class, 'index'])->name('neracaLimbahCair');
+            Route::get('pppu', [RegulasiHealthController::class, 'index'])->name('pppu');
         // Client Page
 
 
