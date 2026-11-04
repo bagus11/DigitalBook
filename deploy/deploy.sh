@@ -24,6 +24,9 @@ if [ "$PULL" = 1 ]; then
   git fetch --quiet origin
   git merge --ff-only origin/"$(git rev-parse --abbrev-ref HEAD)"
   git log --oneline -1
+  # Skrip ini ikut berubah oleh pull di atas; bash sudah terlanjur membaca versi lama dari disk,
+  # jadi sisanya dijalankan ulang dari berkas yang baru.
+  exec "${BASH_SOURCE[0]}" --no-pull
 fi
 
 log "build image"
