@@ -27,5 +27,12 @@ class AppServiceProvider extends ServiceProvider
         config(['app.locale' => 'id']);
         Carbon::setLocale('id');
         date_default_timezone_set('Asia/Jakarta');
+
+        // Aplikasi dilayani di belakang prefix /digital-book oleh nginx host; tanpa ini
+        // Laravel membentuk URL dari root domain sehingga form login mengarah ke /login.
+        if (config('app.env') === 'production') {
+            \URL::forceScheme('https');
+            \URL::forceRootUrl(config('app.url'));
+        }
     }
 }

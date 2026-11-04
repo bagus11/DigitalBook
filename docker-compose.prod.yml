@@ -1,0 +1,10 @@
+services:
+
+  digital_book_php:
+    image: digital-book-php
+    container_name: digital-book-php
+
+  digital_book_nginx:
+    container_name: digital-book-nginx
+    environment:
+      - PHP_HOST=digital_book_php

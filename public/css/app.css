@@ -40480,7 +40480,7 @@ a.text-dark:hover, a.text-dark:focus {
   font-style: normal;
   font-weight: 400;
   font-display: block;
-  src: url(/fonts/vendor/@fortawesome/fontawesome-free/webfa-brands-400.woff2?e033a13ee751afc1860c3bc31ede1065) format("woff2"), url(/fonts/vendor/@fortawesome/fontawesome-free/webfa-brands-400.ttf?150de8eaa454d669c405d810c8dbbf14) format("truetype");
+  src: url(/digital-book/fonts/vendor/@fortawesome/fontawesome-free/webfa-brands-400.woff2?e033a13ee751afc1860c3bc31ede1065) format("woff2"), url(/digital-book/fonts/vendor/@fortawesome/fontawesome-free/webfa-brands-400.ttf?150de8eaa454d669c405d810c8dbbf14) format("truetype");
 }
 .fab,
 .fa-brands {
@@ -42506,7 +42506,7 @@ a.text-dark:hover, a.text-dark:focus {
   font-style: normal;
   font-weight: 400;
   font-display: block;
-  src: url(/fonts/vendor/@fortawesome/fontawesome-free/webfa-regular-400.woff2?3223dc79c1adee56370b19dca985aa17) format("woff2"), url(/fonts/vendor/@fortawesome/fontawesome-free/webfa-regular-400.ttf?d87474231f419288480274125e0e9767) format("truetype");
+  src: url(/digital-book/fonts/vendor/@fortawesome/fontawesome-free/webfa-regular-400.woff2?3223dc79c1adee56370b19dca985aa17) format("woff2"), url(/digital-book/fonts/vendor/@fortawesome/fontawesome-free/webfa-regular-400.ttf?d87474231f419288480274125e0e9767) format("truetype");
 }
 .far,
 .fa-regular {
@@ -42528,7 +42528,7 @@ a.text-dark:hover, a.text-dark:focus {
   font-style: normal;
   font-weight: 900;
   font-display: block;
-  src: url(/fonts/vendor/@fortawesome/fontawesome-free/webfa-solid-900.woff2?bb975c966c37455a1bc3c7e29971386c) format("woff2"), url(/fonts/vendor/@fortawesome/fontawesome-free/webfa-solid-900.ttf?4a2cd718d7031b732e7610fba99ecf74) format("truetype");
+  src: url(/digital-book/fonts/vendor/@fortawesome/fontawesome-free/webfa-solid-900.woff2?bb975c966c37455a1bc3c7e29971386c) format("woff2"), url(/digital-book/fonts/vendor/@fortawesome/fontawesome-free/webfa-solid-900.ttf?4a2cd718d7031b732e7610fba99ecf74) format("truetype");
 }
 .fas,
 .fa-solid {

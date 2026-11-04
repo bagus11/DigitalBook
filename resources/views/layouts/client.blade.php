@@ -84,7 +84,7 @@
           $(".select2").select2({ width: '300px', dropdownCssClass: "bigdrop" });
          
        </script>
-        <script src="assets/pspdfkit.js">
+        <script src="{{ asset('assets/pspdfkit.js') }}">
             alert('test')
         </script>
        
