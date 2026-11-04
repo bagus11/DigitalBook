@@ -1,6 +1,6 @@
 <nav class="main-header navbar navbar-expand-md navbar-light navbar-white">
     <div class="container">
-        <a href="/" class="navbar-brand">
+        <a href="{{ url('/') }}" class="navbar-brand">
             <div class="row">
                 <div class="col">
                     <img src="{{asset('hseIcon.png')}}" width="70px" style="display:block" alt="">
@@ -27,7 +27,7 @@
             @endphp
             <ul class="order-1 order-md-3 navbar-nav navbar-no-expand ml-auto">
                 <li class="nav-item  p-2">
-                    <a href="/" class="nav-link">Home</a>
+                    <a href="{{ url('/') }}" class="nav-link">Home</a>
                 </li>
                 @foreach ($menus as $item)
                     <li class="nav-item dropdown p-2">
