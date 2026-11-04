@@ -10,6 +10,7 @@ set -euo pipefail
 APP_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 COMPOSE="docker compose -f docker-compose.yml -f docker-compose.prod.yml"
 PORT=8088
+HEALTH_URL=${HEALTH_URL:-https://ict.pralon.com/digital-book/}
 PULL=1
 [ "${1:-}" = "--no-pull" ] && PULL=0
 
@@ -45,7 +46,10 @@ chmod -R 775 storage bootstrap/cache
 
 log "cek"
 docker ps --filter name=digital-book --format '{{.Names}} | {{.Status}}'
-code=$(curl -sS -o /dev/null -m 20 -w '%{http_code}' "http://127.0.0.1:${PORT}/" || echo 000)
-echo "http://127.0.0.1:${PORT}/ -> $code"
+# Dicek lewat URL publik, bukan 127.0.0.1:8088: seperti aplikasi lain di host ini, aplikasinya
+# menjawab 500 bila diminta tanpa header X-Forwarded-* dari nginx host (Symfony membaca
+# X-Forwarded-Host kosong sebagai string kosong).
+code=$(curl -sS -o /dev/null -m 30 -w '%{http_code}' "$HEALTH_URL" || echo 000)
+echo "$HEALTH_URL -> $code"
 [ "$code" = "200" ] || { echo "GAGAL: aplikasi tidak menjawab 200"; exit 1; }
 echo "selesai: $(git log --oneline -1)"
